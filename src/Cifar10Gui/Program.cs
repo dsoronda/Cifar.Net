@@ -33,7 +33,7 @@ namespace Cifar10Gui {
 			//var cifarImage = cifar.Dataset.Dogs.ToList()[3];
 			//myForm.MyImageView.Image = cifarImage.RGBData.RGBToImage();
 
-			var images = cifar.Dataset.Dogs.ToList().Take( 50 ).Select( x => x.RGBData.RGBToImage() );
+			var images = cifar.Dataset.Dogs.ToList().Take( 50 ).Select( x => x.BGR_Data.RGBToImage() );
 			myForm.ShowImages( images );
 			application.Run( myForm );
 

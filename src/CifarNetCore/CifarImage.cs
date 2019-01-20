@@ -1,6 +1,5 @@
 using System;
 
-
 namespace CifarNetCore {
 	public class CifarImage {
 		public const int Width = 32;
@@ -29,18 +28,19 @@ namespace CifarNetCore {
 
 
 		/// <summary>
-		/// Create new Image data as RGB RGB RGB pixels vs RRR GGG BBB components
+		/// Create new Image data as BGR BGR BGR pixels vs RRR GGG BBB components
+		/// BMP is little-endian format
 		/// </summary>
-		public byte[] RGBData {
+		public byte[] BGR_Data {
 			get {
-				var rgbBytes = new byte[PixelsPerPlane * 3];
+				var bytes = new byte[PixelsPerPlane * 3];
 				for (var planePixelOffset = 0; planePixelOffset < PixelsPerPlane; planePixelOffset++) {
 					var rgbOffset = planePixelOffset * 3;
-					rgbBytes[rgbOffset + 0] = Red[planePixelOffset];   // Red
-					rgbBytes[rgbOffset + 1] = Green[planePixelOffset]; // Green
-					rgbBytes[rgbOffset + 2] = Blue[planePixelOffset];  // Blue
+					bytes[rgbOffset + 0] = Blue[planePixelOffset];  // Blue
+					bytes[rgbOffset + 1] = Green[planePixelOffset]; // Green
+					bytes[rgbOffset + 2] = Red[planePixelOffset];   // Red
 				}
-				return rgbBytes;
+				return bytes;
 			}
 		}
 	}
