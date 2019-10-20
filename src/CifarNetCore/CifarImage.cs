@@ -7,16 +7,18 @@ namespace CifarNetCore {
 		public const int PixelsPerPlane = Width * Height;
 
 		public CifarImage( byte[] rawImageDataWithLabel ) {
-			if (rawImageDataWithLabel.Length != ( ( 3 * PixelsPerPlane ) + 1 )) // + 1 for label!
-				throw new ArgumentOutOfRangeException( "raw data size should be 3073 bytes !" );
+			if (rawImageDataWithLabel.Length != ( ( 3 * PixelsPerPlane ) + 1 )) {// + 1 for label!
+				throw new ArgumentOutOfRangeException( "Invalid Image size" );
+			} 
 
-			this.LabelId = rawImageDataWithLabel[0];
+			LabelId = rawImageDataWithLabel[0];
+
 			//RawData = ( new Span<byte>( rawImageDataWithLabel ) ).Slice( 1, 3 * 1024 );
 			// I'm copy bytes for better byte aligment in memory (originals are offset by 1 from label)
 			Buffer.BlockCopy( src: rawImageDataWithLabel, srcOffset: 1, dst: RawData, dstOffset: 0, count: 3 * PixelsPerPlane );
 		}
 
-		public int LabelId { get; set; }
+		public int LabelId { get; private set; }
 		public Cifar10Labels CifarLabel => (Cifar10Labels) LabelId;
 		public byte[] RawData { get; set; } = new byte[3 * PixelsPerPlane];
 

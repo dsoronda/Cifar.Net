@@ -30,7 +30,7 @@ namespace Tests {
 		// download dataset, we don't to do it in all test runs
 		//[Test]
 		public void CanExtractDataset_Success() {
-			var targetDir = @"c:\__storage\ML\";
+			var targetDir = @"d:\data\";
 
 			var downloadPath = System.IO.Path.GetTempPath();
 			var archiveFullPath = Path.Combine( downloadPath, Cifar10.Cifar10DatasetFileName );

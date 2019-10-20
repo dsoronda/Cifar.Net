@@ -7,7 +7,7 @@ using Eto.Forms;
 namespace Cifar10Gui {
 	internal class Program {
 		[STAThread]
-		static async Task Main( string[] args ) {
+		static void Main(string[] args) {
 			//new Application(Eto.Platform.Detect).Run(new MainForm());
 			//new Application( Eto.Platforms.Gtk ).Run( new MainForm() );
 
@@ -18,16 +18,17 @@ namespace Cifar10Gui {
 			//return;
 
 
-			var cifar = new CifarNetCore.Cifar10( @"c:\__storage\ML\cifar-10-batches-bin" );
+			var cifar = new CifarNetCore.Cifar10( @"d:\data\cifar-10-batches-bin" );
 			cifar.ParseDataset().Wait();
 			cifar.ParseTestBatch().Wait();
- 
+
 
 			// NOTE : FIRST init Application
 			var application = new Application( Eto.Platforms.Gtk );
+			//var application = new Application( Eto.Platforms.WinForms );
 
 			// NOTE : then create Form (or you will get EXCEPTION !!!)
-			var myForm = new MyImageForm(320, 240);
+			var myForm = new MyImageForm( 640, 480 );
 			//await myForm.LoadImage( @"d:\dload\ofce.jpg" );
 
 			//var cifarImage = cifar.Dataset.Dogs.ToList()[3];
